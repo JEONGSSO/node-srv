@@ -7,10 +7,13 @@ const path = require('path');
 const env = process.env.NODE_ENV || 'dev'
 const envPath = path.resolve(`../.env.${env}`)
 
-require('dotenv').config({ path: envPath });
+const test = require('./config/db.js')
+
+require('dotenv').config({ path: envPath });  
 
 app.get('/', (req, res) => {
-  res.send('good')
+  console.log(123);
+  test()
 })
 
 app.listen(PORT, () => {
