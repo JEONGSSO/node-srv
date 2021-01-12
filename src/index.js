@@ -2,21 +2,14 @@ const express = require('express');
 
 const app = express();
 const PORT = 3001;
-const path = require('path');
 
-const env = process.env.NODE_ENV || 'dev'
-const envPath = path.resolve(`../.env.${env}`)
+const db = require('./config/db.js');
 
-const test = require('./config/db.js')
-
-require('dotenv').config({ path: envPath });  
-
-app.get('/', (req, res) => {
-  console.log(123);
-  test()
-})
+app.get('/', async (req, res) => {
+  const [result] = await db.query(`SELECT * from test`);
+  res.json(result);
+});
 
 app.listen(PORT, () => {
-  console.log('express start port', PORT);
-  console.log(process.env.DB_HOST);
-})
+  console.log(`express start http://localhost:${PORT}`);
+});
