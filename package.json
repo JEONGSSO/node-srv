@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tsc src/app.ts && node src/app.js"
+    "dev": "npx tsc src/app.ts && pm2 start src/app.js"
   },
   "author": "jeongsso",
   "license": "ISC",
