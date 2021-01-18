@@ -16,4 +16,4 @@ const pool = mysql.createPool(databaseConfig).promise();
 
 module.exports = {
   pool
-} ;
+};

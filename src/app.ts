@@ -1,7 +1,9 @@
-// import express from 'express';
+import express from 'express';
 
-import * as db from './config/db.js';
-console.log(db);
+// import db from 'db'
+// console.log(db);
+
+import he from ''
 
 // const app = express();
 // const PORT = 3001;
