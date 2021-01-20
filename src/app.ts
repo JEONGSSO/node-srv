@@ -1,9 +1,8 @@
-import express from 'express';
+// import * as express from 'express';
 
 // import db from 'db'
 // console.log(db);
 
-import he from ''
 
 // const app = express();
 // const PORT = 3001;
