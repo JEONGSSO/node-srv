@@ -1,3 +1,4 @@
-declare module 'db' {
-  export = 'good'
-}
+// declare module 'db' {
+//   import db from "../config/db.js";
+//   export default db
+// }

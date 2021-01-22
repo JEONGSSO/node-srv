@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 
 const path = require('path');
 const env = process.env.NODE_ENV || 'dev';
-const envPath = path.resolve(`../.env.${env}`);
+const envPath = path.resolve(`${process.env.PWD}/.env.${env}`);
 require('dotenv').config({ path: envPath });
 
 const databaseConfig = {
@@ -14,6 +14,4 @@ const databaseConfig = {
 
 const pool = mysql.createPool(databaseConfig).promise();
 
-module.exports = {
-  pool
-};
+export = pool;
