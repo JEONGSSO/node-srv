@@ -1,15 +1,22 @@
-import * as express from 'express';
+import * as express from 'express'
+import * as fs from 'fs'
 
-import * as db from '../src/config/db'
+const app = express()
+const PORT: number = 3001;
+const router: any = express.Router()
 
-const app = express();
-const PORT = 3001;
+fs.readdirSync(`${__dirname}/routes`)
+  .reduce((preRoutes: any, nextRoutes) => {
+    const routes = require(`${__dirname}/routes/${nextRoutes}`).Routes
+    return [...preRoutes, ...routes]
+}, [])
+  .forEach((r: any) => {
+    const { endpoint, method, controller } = r
+    router[method](endpoint, controller)
+})
 
-app.get('/', async (req: any, res: any) => {
-  const [result] = await db.query(`SELECT * from test`);
-  res.json(result);
-});
+app.use('/', router)
 
 app.listen(PORT, () => {
-  console.log(`express start http://localhost:${PORT}`);
+  console.log(`express start http://localhost:${PORT}`)
 });
