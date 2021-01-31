@@ -1,4 +1,4 @@
-const add = (a:number, b:number): number => a + b;
+const add = (a: number, b: number): number => a + b;
 
 // const test1 :Function = (a:number, b: number, fn: Function) => fn(a ,b)
 // const tt = test1(2, 3, add)
