@@ -1,4 +1,4 @@
-export interface joinType {
+export type joinType = {
   email: string;
   password: string;
   nickname: string;
