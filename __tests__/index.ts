@@ -1,9 +1,9 @@
 
 describe('index.ts', () => {
-   const add = (a:number, b:number): number => a + b;
+   const add = (...rest: number[]): number => rest.reduce((val, acc) => val + acc);
 
-   test.skip('Add Function Test', () => {
-      expect(add(2, 3)).toBe(5)
+   test('Add Function Test', () => {
+      expect(add(2, 3, 3, 4, 5, 6, 6)).toBe(29)
    })
 
    test.skip('first character upperCase converter', () => {
@@ -19,7 +19,7 @@ describe('index.ts', () => {
 
    })
 
-   test('fibonacci learn', () => {
+   test.skip('fibonacci learn', () => {
       // 0 이상의 정수 n 이 주어질 때 n 번째 피보나치 수를 구하는 것이다
 
       const fibonacci = (num:any) => {
