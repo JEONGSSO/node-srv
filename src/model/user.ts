@@ -1,13 +1,13 @@
 import * as db from '../../src/config/db';
-import { joinType } from '../../types/user';
+import { joinType, modifyType } from '../../types/user';
 
-export const userInfo = async (idx: string) => {
+export const userInfo = async (idx: number) => {
   return await db.query(`SELECT * FROM user WHERE idx = ${idx}`);
 };
 
 export const userJoin = async (userForm: joinType) => {
   const { email, password, nickname } = userForm;
-  const tt = await db.query(
+  await db.query(
     `INSERT INTO user
     (
       email,
@@ -21,5 +21,19 @@ export const userJoin = async (userForm: joinType) => {
       '${nickname}'
       )`
   );
+  return 200;
+};
+
+export const userModify = async (userForm: modifyType) => {
+  await db.query(
+    `UPDATE user
+    SET ${userForm.type} = '${userForm.value}'
+    WHERE idx = ${userForm.idx}`
+  );
+  return 200;
+};
+
+export const userDelete = async (idx: number) => {
+  await db.query(`DELETE FROM user WHERE idx = ${idx}`);
   return 200;
 };
