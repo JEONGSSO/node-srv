@@ -16,17 +16,39 @@ const add = (...rest: number[]): number => rest.reduce((val, acc) => val + acc);
 
 // console.log(test3(1, numArray, 'good1', 2))
 
-const withCount = (fn: Function) => {
-   let count = 0;
-   return (...args: number[]) => {
-      console.log(`Count: ${++count}`)
-      return fn(...args)
-   }
+// const withCount = (fn: Function) => {
+//   let count = 0;
+//   return (...args: number[]) => {
+//     console.log(`Count: ${++count}`);
+//     return fn(...args);
+//   };
+// };
+
+// const countedAdd = withCount(add);
+
+// console.log(countedAdd(1, 1, 2));
+// console.log(countedAdd(1, 2));
+// console.log(countedAdd(1, 3));
+
+// interface Typeee<T, TT> {
+//    a: T,
+//    b: TT
+// }
+
+// const ttt = <T>(a:Typeee<string, string>, b:Typeee<string, string>):T<string, string> => {
+//    return a + b
+// }
+
+const tt = <T>(a: T): T => {
+  return a;
+};
+
+interface GenericLogTextFn {
+  <T>(text: T): T;
 }
 
-const countedAdd = withCount(add);
+// 밑에 두개는 같다
+let str: <T>(text: T) => T = tt;
+let str2: GenericLogTextFn = tt;
 
-console.log(countedAdd(1, 1, 2))
-console.log(countedAdd(1, 2))
-console.log(countedAdd(1, 3))
-
+console.log(str<string>('zzzzzz'));
