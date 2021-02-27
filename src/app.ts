@@ -2,6 +2,10 @@ import * as express from 'express';
 import * as fs from 'fs';
 import * as cors from 'cors';
 
+import { listenServer } from './plugins/socket.io';
+
+listenServer();
+
 const app = express();
 const PORT: number = 3001;
 const router: any = express.Router();
