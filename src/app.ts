@@ -1,14 +1,18 @@
 import * as express from 'express';
 import * as fs from 'fs';
 import * as cors from 'cors';
+import { createServer } from 'http';
 
-import { listenServer } from './plugins/socket.io';
-
-listenServer();
+import { InitSocket } from './plugins/socket.io';
 
 const app = express();
 const PORT: number = 3001;
 const router: any = express.Router();
+
+const server = createServer(app);
+const socket = new InitSocket(server);
+
+socket.setUp();
 
 app.use(express.json());
 app.use(cors());

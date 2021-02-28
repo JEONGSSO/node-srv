@@ -1,30 +1,37 @@
-import { createServer } from 'http';
-import socket, { Server, Socket } from 'socket.io';
-import { Express } from 'express';
+import { Server, Socket } from 'socket.io';
 
+interface roomInfo {
+  roomId: string;
+}
 class InitSocket {
-  io: Express | null = null;
+  public io: Server;
 
-  constructor(server: Express | null) {
-    this.io = socket(server);
+  constructor(server: Express.Application) {
+    this.io = new Server(server);
   }
 
   setUp() {
-    this.io.on('connection', (socket: Socket) => {
-      socket.emit('hello', { msg: 'connection' });
+    this.io.listen(3000);
 
-      socket.on('message', (data) => {
-        console.log('data', data);
+    this.io.on('connection', (socket: Socket) => {
+      socket.emit('connected', socket.id + ' connected!!!');
+
+      socket.on('joinRoom', ({ roomId }: roomInfo, leaveRoomFn: Function) => {
+        leaveRoomFn && leaveRoomFn();
+        this.joinRoom(socket, roomId);
+      });
+
+      socket.on('leaveRoom', (roomId: string) => {
+        socket.leave(roomId);
+        this.io.to(roomId).emit('joinRoom', `${socket.id}, ${roomId} 나감요`);
       });
     });
   }
+
+  joinRoom(socket: Socket, roomId: string) {
+    socket.join(roomId);
+    this.io.to(roomId).emit('joinRoom', `${socket.id}, ${roomId} 조인요`);
+  }
 }
 
-const httpServer = createServer();
-const io = new Server(httpServer, {});
-
-const listenServer = () => {
-  httpServer.listen(3000);
-};
-
-export { listenServer };
+export { InitSocket };
