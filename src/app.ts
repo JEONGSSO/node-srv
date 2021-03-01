@@ -6,7 +6,7 @@ import { createServer } from 'http';
 import { InitSocket } from './plugins/socket.io';
 
 const app = express();
-const PORT: number = 3001;
+const PORT: number = 3000;
 const router: any = express.Router();
 
 const server = createServer(app);
@@ -29,6 +29,6 @@ fs.readdirSync(`${__dirname}/routes`)
 
 app.use('/', router);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`express start http://localhost:${PORT}`);
 });
