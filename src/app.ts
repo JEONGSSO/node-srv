@@ -4,6 +4,7 @@ import * as cors from 'cors';
 import { createServer } from 'http';
 
 import { InitSocket } from './plugins/socket.io';
+import { htmlRender } from './plugins/kakaoMap.js';
 
 const app = express();
 const PORT: number = 3000;
@@ -26,6 +27,10 @@ fs.readdirSync(`${__dirname}/routes`)
     const { endpoint, method, controller } = r;
     router[method](endpoint, controller);
   });
+
+// app.get(`/`, (req, res) => {
+//   res.send(htmlRender());
+// });
 
 app.use('/', router);
 
